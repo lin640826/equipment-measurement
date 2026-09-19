@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="設備量測工具" />
+  <title>設備量測工具</title>
+  <style>
+    :root{
+      --bg:#0b1220; --panel:#111827; --panel2:#172033; --line:#334155; --text:#f8fafc;
+      --muted:#94a3b8; --accent:#60a5fa; --ok:#22c55e; --ng:#ef4444; --warn:#f59e0b;
+      --circle:#facc15; --device:#5b9bd5; --plus:#ef4444; --minus:#22c55e;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,"Noto Sans TC","PingFang TC",sans-serif;background:linear-gradient(180deg,#0b1220,#111827);color:var(--text)}
+    .app{max-width:820px;margin:auto;padding:16px 14px 28px}
+    h1{font-size:24px;margin:4px 0 14px;text-align:center}
+    .card{background:rgba(17,24,39,.96);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .main-tabs,.sub-tabs{display:grid;gap:8px;margin:0 0 14px}.main-tabs{grid-template-columns:1fr 1fr}.sub-tabs{grid-template-columns:1fr 1fr;margin-top:14px}
+    button{font:inherit}
+    .main-tab,.tab{padding:12px;border:1px solid var(--line);background:#0f172a;color:var(--muted);border-radius:12px;font-size:16px;font-weight:800}
+    .main-tab.active,.tab.active{background:#1d4ed8;color:#fff;border-color:#3b82f6}
+    .module{display:none}.module.active{display:block}
+    label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
+    input{width:100%;font-size:20px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#0f172a;color:var(--text);outline:none}
+    input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(96,165,250,.15)}
+    .device{position:relative;background:var(--device);border-radius:52px;padding:34px 24px 30px;min-height:470px;margin-top:8px;border:2px solid rgba(255,255,255,.15)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;gap:24px 28px;align-items:center}
+    .point{display:flex;flex-direction:column;align-items:center;gap:7px}.point.center{grid-column:1/3;justify-self:center}
+    .circle{width:132px;height:132px;border-radius:50%;background:var(--circle);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -8px 14px rgba(0,0,0,.09),0 6px 18px rgba(0,0,0,.18)}
+    .center .circle{width:176px;height:176px}.circle input{width:102px;text-align:center;background:transparent;border:0;color:#111827;font-weight:800;padding:0;font-size:24px;box-shadow:none}.center .circle input{font-size:27px;width:132px}
+    .name{font-weight:800;color:#0f172a;background:white;padding:4px 10px;border-radius:8px;font-size:15px}.delta{min-width:84px;text-align:center;background:white;color:#111827;border-radius:8px;padding:7px 10px;font-weight:800;font-size:18px}
+    .status{margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{background:#0f172a;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}.stat .k{color:var(--muted);font-size:12px}.stat .v{font-size:19px;font-weight:800;margin-top:3px}
+    .result{margin-top:10px;padding:14px;border-radius:14px;text-align:center;font-size:23px;font-weight:900;border:1px solid var(--line)}.result.empty{color:var(--muted);background:#0f172a}.result.ok{background:rgba(34,197,94,.16);color:#86efac;border-color:rgba(34,197,94,.5)}.result.ng{background:rgba(239,68,68,.16);color:#fca5a5;border-color:rgba(239,68,68,.5)}
+    .actions{display:flex;gap:10px;margin-top:12px}.actions button{flex:1;padding:11px;border:0;border-radius:12px;font-weight:800;font-size:15px}.secondary{background:#334155;color:#fff}.sample{background:#2563eb;color:#fff}.hint{color:var(--muted);font-size:13px;line-height:1.55;margin-top:10px;text-align:center}
+    .xy-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.axis-card{background:#0f172a;border:1px solid var(--line);border-radius:16px;padding:14px}.axis-title{font-size:20px;font-weight:900;margin-bottom:12px}.axis-title span{color:var(--accent);font-size:14px;margin-left:6px}.field{margin-bottom:12px}.move-box{padding:12px;border-radius:12px;background:#172033;border:1px solid var(--line);margin:8px 0 12px;text-align:center}.move-box .k{font-size:12px;color:var(--muted)}.move-box .v{font-size:28px;font-weight:900;margin-top:4px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{border-radius:14px;padding:12px 8px;text-align:center;border:1px solid var(--line);min-width:0}.choice.plus{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.55)}.choice.minus{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.55)}.equation{display:flex;flex-direction:column;align-items:center;gap:3px}.equation .base,.equation .delta,.equation .resultv{font-weight:900;white-space:nowrap;line-height:1.08;letter-spacing:-.5px}.equation .base,.equation .delta{font-size:clamp(16px,4.2vw,22px);color:var(--text);background:transparent;border-radius:0;padding:0;min-width:0;width:auto}.equation .sign,.equation .equals{font-size:24px;font-weight:950;line-height:1}.equation .equals{display:inline-block;transform:rotate(90deg)}.choice.plus .sign,.choice.plus .equals,.choice.plus .resultv{color:#fca5a5}.choice.minus .sign,.choice.minus .equals,.choice.minus .resultv{color:#86efac}.equation .resultv{font-size:clamp(17px,4.6vw,24px)}
+    .formula{margin-top:8px;font-size:12px;color:var(--muted);line-height:1.5}.xy-summary{margin-top:14px;padding:12px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);font-size:13px;text-align:center}
+    .shot-btn{position:fixed;right:16px;bottom:18px;z-index:9999;border:1px solid #60a5fa;background:#2563eb;color:#fff;border-radius:999px;padding:12px 16px;font-size:15px;font-weight:900;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .shot-btn:active{transform:scale(.97)}
+    @media (max-width:620px){.app{padding:10px}.device{padding:26px 14px;min-height:430px;border-radius:38px}.grid{gap:18px 18px}.circle{width:110px;height:110px}.center .circle{width:150px;height:150px}.circle input{font-size:21px;width:88px}.center .circle input{font-size:24px}.status{grid-template-columns:1fr 1fr}.xy-grid{grid-template-columns:1fr}.equation .base,.equation .delta{font-size:clamp(15px,4.3vw,20px)}.equation .resultv{font-size:clamp(16px,4.7vw,21px)}}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <h1>設備量測工具</h1>
+    <div class="main-tabs">
+      <button class="main-tab active" data-module="five">五點量測</button>
+      <button class="main-tab" data-module="xy">XY 參數修正</button>
+    </div>
+
+    <section id="five" class="card module active">
+      <label for="equip">設備 / ID</label><input id="equip" value="TZEXA09A" autocomplete="off" />
+      <div class="sub-tabs"><button class="tab active" data-mode="before">BEFORE</button><button class="tab" data-mode="after">AFTER</button></div>
+      <div class="device"><div class="grid">
+        <div class="point"><div class="name">左上 LU</div><div class="circle"><input inputmode="numeric" id="lu" placeholder="—"></div><div class="delta" id="d_lu">—</div></div>
+        <div class="point"><div class="name">右上 RU</div><div class="circle"><input inputmode="numeric" id="ru" placeholder="—"></div><div class="delta" id="d_ru">—</div></div>
+        <div class="point center"><div class="name">中央 CENTER</div><div class="circle"><input inputmode="numeric" id="center" placeholder="—"></div></div>
+        <div class="point"><div class="name">左下 LD</div><div class="circle"><input inputmode="numeric" id="ld" placeholder="—"></div><div class="delta" id="d_ld">—</div></div>
+        <div class="point"><div class="name">右下 RD</div><div class="circle"><input inputmode="numeric" id="rd" placeholder="—"></div><div class="delta" id="d_rd">—</div></div>
+      </div></div>
+      <div class="status"><div class="stat"><div class="k">MAX</div><div class="v" id="max">—</div></div><div class="stat"><div class="k">MIN</div><div class="v" id="min">—</div></div><div class="stat"><div class="k">RANGE</div><div class="v" id="range">—</div></div><div class="stat"><div class="k">規格</div><div class="v">≤ 10</div></div></div>
+      <div id="result" class="result empty">請輸入 5 個數值</div>
+      <div class="actions"><button class="sample" id="sample">載入範例</button><button class="secondary" id="clear">清除目前頁</button></div>
+      <div class="hint">差值公式：CENTER − 各位置；判定公式：MAX − MIN ≤ 10 為 PASS。</div>
+    </section>
+
+    <section id="xy" class="card module">
+      <div class="xy-grid">
+        <div class="axis-card">
+          <div class="axis-title">X 軸 <span>參數 X9210</span></div>
+          <div class="field"><label>X 固定基準位置</label><input id="x_base" inputmode="numeric" value="348034" readonly></div>
+          <div class="field"><label>X 移動後位置</label><input id="x_new" inputmode="numeric" placeholder="例如 319492"></div>
+          <div class="move-box"><div class="k">移動量（取絕對值）</div><div class="v" id="x_delta">—</div></div>
+          <div class="field"><label>目前 X9210</label><input id="x_param" inputmode="numeric" placeholder="例如 17860829"></div>
+          <div class="pair">
+            <div class="choice plus"><div class="equation" id="x_plus"><div class="resultv">—</div></div></div>
+            <div class="choice minus"><div class="equation" id="x_minus"><div class="resultv">—</div></div></div>
+          </div>
+          <div class="formula" id="x_formula" hidden></div>
+        </div>
+
+        <div class="axis-card">
+          <div class="axis-title">Y 軸 <span>參數 Y9211</span></div>
+          <div class="field"><label>Y 固定基準位置</label><input id="y_base" inputmode="numeric" value="340765" readonly></div>
+          <div class="field"><label>Y 移動後位置</label><input id="y_new" inputmode="numeric" placeholder="例如 327593"></div>
+          <div class="move-box"><div class="k">移動量（取絕對值）</div><div class="v" id="y_delta">—</div></div>
+          <div class="field"><label>目前 Y9211</label><input id="y_param" inputmode="numeric" placeholder="輸入目前參數值"></div>
+          <div class="pair">
+            <div class="choice plus"><div class="equation" id="y_plus"><div class="resultv">—</div></div></div>
+            <div class="choice minus"><div class="equation" id="y_minus"><div class="resultv">—</div></div></div>
+          </div>
+          <div class="formula" id="y_formula" hidden></div>
+        </div>
+      </div>
+      <div class="actions"><button class="sample" id="xy_sample">載入圖片範例</button><button class="secondary" id="xy_clear">清除 XY</button></div>
+      <div class="xy-summary">固定基準：X = 348,034、Y = 340,765。只要輸入移動後位置與目前 X9210 / Y9211，App 就會列出「+ 移動量」與「− 移動量」兩個結果。</div>
+    </section>
+  </main>
+  <button id="shotBtn" class="shot-btn" type="button">📸 整頁截圖</button>
+<script src="./html2canvas.min.js"></script>
+<script>
+const fmt=n=>Number.isFinite(n)?Math.trunc(n).toLocaleString('en-US'):'—';
+const $=id=>document.getElementById(id);
+
+document.querySelectorAll('.main-tab').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.main-tab').forEach(x=>x.classList.toggle('active',x===b));
+  document.querySelectorAll('.module').forEach(m=>m.classList.toggle('active',m.id===b.dataset.module));
+}));
+
+const modes={before:{},after:{}}; let mode='before'; const ids=['lu','ru','center','ld','rd'];
+function saveCurrent(){ids.forEach(id=>modes[mode][id]=$(id).value)}
+function loadMode(){ids.forEach(id=>$(id).value=modes[mode][id]??'');calcFive()}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{saveCurrent();mode=b.dataset.mode;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));loadMode()}));
+ids.forEach(id=>$(id).addEventListener('input',()=>{saveCurrent();calcFive()}));
+function num(id){const v=$(id).value.trim().replaceAll(',','');return v===''?null:Number(v)}
+function setDelta(id,c,v){$(id).textContent=(c==null||v==null)?'—':fmt(c-v)}
+function calcFive(){const v={lu:num('lu'),ru:num('ru'),center:num('center'),ld:num('ld'),rd:num('rd')};setDelta('d_lu',v.center,v.lu);setDelta('d_ru',v.center,v.ru);setDelta('d_ld',v.center,v.ld);setDelta('d_rd',v.center,v.rd);const vals=ids.map(k=>v[k]),r=$('result');if(vals.some(x=>x==null||Number.isNaN(x))){$('max').textContent=$('min').textContent=$('range').textContent='—';r.className='result empty';r.textContent='請輸入 5 個數值';return}const max=Math.max(...vals),min=Math.min(...vals),range=max-min;$('max').textContent=fmt(max);$('min').textContent=fmt(min);$('range').textContent=fmt(range);if(range<=10){r.className='result ok';r.textContent=`✅ PASS｜最大差值 ${range}`}else{r.className='result ng';r.textContent=`❌ NG｜最大差值 ${range}（超出 ${range-10}）`}}
+$('clear').addEventListener('click',()=>{ids.forEach(id=>modes[mode][id]='');loadMode()});
+$('sample').addEventListener('click',()=>{const s=mode==='before'?{lu:19760,ru:19787,center:19779,ld:19773,rd:19801}:{lu:19879,ru:19879,center:19878,ld:19876,rd:19878};Object.assign(modes[mode],s);loadMode()});
+
+function renderEquation(el,param,delta,sign,result){if(param==null||delta==null||result==null){el.innerHTML='<div class="resultv">—</div>';return}el.innerHTML=`<div class="base">${Math.trunc(param)}</div><div class="sign">${sign}</div><div class="delta">${Math.trunc(delta)}</div><div class="equals">=</div><div class="resultv">${Math.trunc(result)}</div>`}
+function calcAxis(axis){const base=num(axis+'_base'),next=num(axis+'_new'),param=num(axis+'_param');const dEl=$(axis+'_delta'),pEl=$(axis+'_plus'),mEl=$(axis+'_minus'),fEl=$(axis+'_formula');if(base==null||next==null||Number.isNaN(base)||Number.isNaN(next)){dEl.textContent='—';renderEquation(pEl,null,null,'＋',null);renderEquation(mEl,null,null,'−',null);fEl.textContent='輸入原始位置與移動後位置後，自動計算移動量。';return}const delta=Math.abs(next-base);dEl.textContent=fmt(delta);if(param==null||Number.isNaN(param)){renderEquation(pEl,null,null,'＋',null);renderEquation(mEl,null,null,'−',null);fEl.textContent=`移動量 = |${fmt(next)} − ${fmt(base)}| = ${fmt(delta)}；再輸入目前參數值。`;return}const plus=param+delta,minus=param-delta;renderEquation(pEl,param,delta,'＋',plus);renderEquation(mEl,param,delta,'−',minus);fEl.textContent=`移動量 ${fmt(delta)}｜+ 結果 ${fmt(plus)}｜− 結果 ${fmt(minus)}`}
+['x_new','x_param'].forEach(id=>$(id).addEventListener('input',()=>calcAxis('x')));['y_new','y_param'].forEach(id=>$(id).addEventListener('input',()=>calcAxis('y')));
+$('xy_sample').addEventListener('click',()=>{$('x_new').value='319492';$('x_param').value='17860829';$('y_new').value='327593';$('y_param').value='';calcAxis('x');calcAxis('y')});
+$('xy_clear').addEventListener('click',()=>{['x_new','x_param','y_new','y_param'].forEach(id=>$(id).value='');$('x_base').value='348034';$('y_base').value='340765';calcAxis('x');calcAxis('y')});
+
+const shotBtn=$('shotBtn');
+async function capturePwaFullPage(){
+  shotBtn.style.display='none';
+  try{
+    await new Promise(r=>setTimeout(r,80));
+    const canvas=await html2canvas(document.body,{
+      backgroundColor:'#0b1220',
+      scale:Math.min(2,window.devicePixelRatio||1),
+      useCORS:true,
+      logging:false,
+      width:document.documentElement.scrollWidth,
+      height:document.documentElement.scrollHeight,
+      windowWidth:document.documentElement.scrollWidth,
+      windowHeight:document.documentElement.scrollHeight,
+      scrollX:0,
+      scrollY:-window.scrollY
+    });
+    const blob=await new Promise(r=>canvas.toBlob(r,'image/png',1));
+    if(!blob) throw new Error('無法產生圖片');
+    const stamp=new Date().toISOString().replace(/[-:T]/g,'').slice(0,14);
+    const file=new File([blob],'設備量測_'+stamp+'.png',{type:'image/png'});
+    if(navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){
+      await navigator.share({files:[file],title:'設備量測截圖'});
+    }else{
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;a.download=file.name;document.body.appendChild(a);a.click();a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),1500);
+    }
+  }catch(e){
+    if(e && e.name!=='AbortError') alert('截圖失敗：'+(e.message||e));
+  }finally{
+    shotBtn.style.display='block';
+  }
+}
+shotBtn.addEventListener('click',()=>{
+  if(window.Android && typeof window.Android.captureFullPage==='function'){
+    shotBtn.style.display='none';
+    requestAnimationFrame(()=>setTimeout(()=>window.Android.captureFullPage(),60));
+  }else{
+    capturePwaFullPage();
+  }
+});
+window.restoreScreenshotButton=()=>{shotBtn.style.display='block'};
+
+if('serviceWorker' in navigator){navigator.serviceWorker.register('./service-worker.js').catch(()=>{})}
+calcFive();calcAxis('x');calcAxis('y');
+</script>
+</body>
+</html>
