@@ -1,4 +1,4 @@
-const CACHE='equipment-measurement-pwa-v2';
+const CACHE='equipment-measurement-pwa-v3';
 const ASSETS=['./','./index.html','./manifest.json','./html2canvas.min.js','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()));

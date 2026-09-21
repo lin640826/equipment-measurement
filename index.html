@@ -22,7 +22,7 @@
     .app{max-width:820px;margin:auto;padding:16px 14px 28px}
     h1{font-size:24px;margin:4px 0 14px;text-align:center}
     .card{background:rgba(17,24,39,.96);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    .main-tabs,.sub-tabs{display:grid;gap:8px;margin:0 0 14px}.main-tabs{grid-template-columns:1fr 1fr}.sub-tabs{grid-template-columns:1fr 1fr;margin-top:14px}
+    .main-tabs,.sub-tabs{display:grid;gap:8px;margin:0 0 14px}.main-tabs{grid-template-columns:repeat(3,1fr)}.sub-tabs{grid-template-columns:1fr 1fr;margin-top:14px}
     button{font:inherit}
     .main-tab,.tab{padding:12px;border:1px solid var(--line);background:#0f172a;color:var(--muted);border-radius:12px;font-size:16px;font-weight:800}
     .main-tab.active,.tab.active{background:#1d4ed8;color:#fff;border-color:#3b82f6}
@@ -41,6 +41,7 @@
     .actions{display:flex;gap:10px;margin-top:12px}.actions button{flex:1;padding:11px;border:0;border-radius:12px;font-weight:800;font-size:15px}.secondary{background:#334155;color:#fff}.sample{background:#2563eb;color:#fff}.hint{color:var(--muted);font-size:13px;line-height:1.55;margin-top:10px;text-align:center}
     .xy-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.axis-card{background:#0f172a;border:1px solid var(--line);border-radius:16px;padding:14px}.axis-title{font-size:20px;font-weight:900;margin-bottom:12px}.axis-title span{color:var(--accent);font-size:14px;margin-left:6px}.field{margin-bottom:12px}.move-box{padding:12px;border-radius:12px;background:#172033;border:1px solid var(--line);margin:8px 0 12px;text-align:center}.move-box .k{font-size:12px;color:var(--muted)}.move-box .v{font-size:28px;font-weight:900;margin-top:4px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{border-radius:14px;padding:12px 8px;text-align:center;border:1px solid var(--line);min-width:0}.choice.plus{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.55)}.choice.minus{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.55)}.equation{display:flex;flex-direction:column;align-items:center;gap:3px}.equation .base,.equation .delta,.equation .resultv{font-weight:900;white-space:nowrap;line-height:1.08;letter-spacing:-.5px}.equation .base,.equation .delta{font-size:clamp(16px,4.2vw,22px);color:var(--text);background:transparent;border-radius:0;padding:0;min-width:0;width:auto}.equation .sign,.equation .equals{font-size:24px;font-weight:950;line-height:1}.equation .equals{display:inline-block;transform:rotate(90deg)}.choice.plus .sign,.choice.plus .equals,.choice.plus .resultv{color:#fca5a5}.choice.minus .sign,.choice.minus .equals,.choice.minus .resultv{color:#86efac}.equation .resultv{font-size:clamp(17px,4.6vw,24px)}
     .formula{margin-top:8px;font-size:12px;color:var(--muted);line-height:1.5}.xy-summary{margin-top:14px;padding:12px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);font-size:13px;text-align:center}
+    .chuck-controls{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 14px}.corner-toggle{padding:10px 8px;border-radius:12px;border:1px solid rgba(34,197,94,.55);background:rgba(34,197,94,.14);color:#86efac;font-weight:900}.corner-toggle.off{border-color:#475569;background:#0f172a;color:#64748b}.chuck-wrap{display:flex;justify-content:center;padding:8px 0 4px}.chuck-disc{width:min(100%,520px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 45%,#334155 0,#172033 58%,#0f172a 100%);border:3px solid #475569;box-shadow:inset 0 0 35px rgba(0,0,0,.45),0 12px 28px rgba(0,0,0,.28);padding:12%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:7%;align-items:center;justify-items:center}.chuck-point{width:min(22vw,104px);aspect-ratio:1;border-radius:50%;background:#facc15;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:2px solid rgba(255,255,255,.55);box-shadow:inset 0 -6px 12px rgba(0,0,0,.12),0 5px 12px rgba(0,0,0,.22);transition:.18s ease}.chuck-point input{width:86%;border:0;background:transparent;color:#111827;text-align:center;font-size:clamp(16px,4.5vw,23px);font-weight:900;padding:0;box-shadow:none}.chuck-point .cp-name{font-size:11px;color:#334155;font-weight:900;line-height:1}.chuck-point.off{background:#334155;border-color:#475569;opacity:.42;box-shadow:none}.chuck-point.off input{color:#94a3b8}.chuck-note{margin-top:10px;text-align:center;color:var(--muted);font-size:13px;line-height:1.55}
     .shot-btn{position:fixed;right:16px;bottom:18px;z-index:9999;border:1px solid #60a5fa;background:#2563eb;color:#fff;border-radius:999px;padding:12px 16px;font-size:15px;font-weight:900;box-shadow:0 10px 30px rgba(0,0,0,.35)}
     .shot-btn:active{transform:scale(.97)}
     @media (max-width:620px){.app{padding:10px}.device{padding:26px 14px;min-height:430px;border-radius:38px}.grid{gap:18px 18px}.circle{width:110px;height:110px}.center .circle{width:150px;height:150px}.circle input{font-size:21px;width:88px}.center .circle input{font-size:24px}.status{grid-template-columns:1fr 1fr}.xy-grid{grid-template-columns:1fr}.equation .base,.equation .delta{font-size:clamp(15px,4.3vw,20px)}.equation .resultv{font-size:clamp(16px,4.7vw,21px)}}
@@ -52,6 +53,7 @@
     <div class="main-tabs">
       <button class="main-tab active" data-module="five">五點量測</button>
       <button class="main-tab" data-module="xy">XY 參數修正</button>
+      <button class="main-tab" data-module="chuck">Chuck水平</button>
     </div>
 
     <section id="five" class="card module active">
@@ -101,6 +103,33 @@
       <div class="actions"><button class="sample" id="xy_sample">載入圖片範例</button><button class="secondary" id="xy_clear">清除 XY</button></div>
       <div class="xy-summary">固定基準：X = 348,034、Y = 340,765。只要輸入移動後位置與目前 X9210 / Y9211，App 就會列出「+ 移動量」與「− 移動量」兩個結果。</div>
     </section>
+
+    <section id="chuck" class="card module">
+      <div class="axis-title">Chuck水平 <span>9 點圓形量測</span></div>
+      <div class="chuck-controls">
+        <button class="corner-toggle" type="button" data-point="ch_lt">左上：開</button>
+        <button class="corner-toggle" type="button" data-point="ch_rt">右上：開</button>
+        <button class="corner-toggle" type="button" data-point="ch_lb">左下：開</button>
+        <button class="corner-toggle" type="button" data-point="ch_rb">右下：開</button>
+      </div>
+      <div class="chuck-wrap">
+        <div class="chuck-disc">
+          <div class="chuck-point" id="box_ch_lt"><div class="cp-name">左上</div><input id="ch_lt" inputmode="numeric" placeholder="—"></div>
+          <div class="chuck-point" id="box_ch_t"><div class="cp-name">上</div><input id="ch_t" inputmode="numeric" placeholder="—"></div>
+          <div class="chuck-point" id="box_ch_rt"><div class="cp-name">右上</div><input id="ch_rt" inputmode="numeric" placeholder="—"></div>
+
+          <div class="chuck-point" id="box_ch_l"><div class="cp-name">左</div><input id="ch_l" inputmode="numeric" placeholder="—"></div>
+          <div class="chuck-point" id="box_ch_c"><div class="cp-name">中央</div><input id="ch_c" inputmode="numeric" placeholder="—"></div>
+          <div class="chuck-point" id="box_ch_r"><div class="cp-name">右</div><input id="ch_r" inputmode="numeric" placeholder="—"></div>
+
+          <div class="chuck-point" id="box_ch_lb"><div class="cp-name">左下</div><input id="ch_lb" inputmode="numeric" placeholder="—"></div>
+          <div class="chuck-point" id="box_ch_b"><div class="cp-name">下</div><input id="ch_b" inputmode="numeric" placeholder="—"></div>
+          <div class="chuck-point" id="box_ch_rb"><div class="cp-name">右下</div><input id="ch_rb" inputmode="numeric" placeholder="—"></div>
+        </div>
+      </div>
+      <div class="actions"><button class="sample" id="chuck_sample">載入範例</button><button class="secondary" id="chuck_clear">清除 Chuck</button></div>
+      <div class="chuck-note">四個角落點可個別開關；關閉後該點不需輸入。</div>
+    </section>
   </main>
   <button id="shotBtn" class="shot-btn" type="button">📸 整頁截圖</button>
 <script src="./html2canvas.min.js"></script>
@@ -129,6 +158,28 @@ function calcAxis(axis){const base=num(axis+'_base'),next=num(axis+'_new'),param
 ['x_new','x_param'].forEach(id=>$(id).addEventListener('input',()=>calcAxis('x')));['y_new','y_param'].forEach(id=>$(id).addEventListener('input',()=>calcAxis('y')));
 $('xy_sample').addEventListener('click',()=>{$('x_new').value='319492';$('x_param').value='17860829';$('y_new').value='327593';$('y_param').value='';calcAxis('x');calcAxis('y')});
 $('xy_clear').addEventListener('click',()=>{['x_new','x_param','y_new','y_param'].forEach(id=>$(id).value='');$('x_base').value='348034';$('y_base').value='340765';calcAxis('x');calcAxis('y')});
+
+const chuckIds=['ch_lt','ch_t','ch_rt','ch_l','ch_c','ch_r','ch_lb','ch_b','ch_rb'];
+const chuckCorners=new Set(['ch_lt','ch_rt','ch_lb','ch_rb']);
+const chuckEnabled={ch_lt:true,ch_rt:true,ch_lb:true,ch_rb:true};
+function renderChuckCorner(id){
+  const on=chuckEnabled[id]!==false;
+  const input=$(id),box=$('box_'+id),btn=document.querySelector('.corner-toggle[data-point="'+id+'"]');
+  if(input) input.disabled=!on;
+  if(box) box.classList.toggle('off',!on);
+  if(btn){btn.classList.toggle('off',!on);const label=btn.textContent.split('：')[0];btn.textContent=label+'：'+(on?'開':'關');}
+}
+document.querySelectorAll('.corner-toggle').forEach(btn=>btn.addEventListener('click',()=>{
+  const id=btn.dataset.point;
+  chuckEnabled[id]=!chuckEnabled[id];
+  renderChuckCorner(id);
+}));
+$('chuck_sample').addEventListener('click',()=>{
+  const vals={ch_lt:9600,ch_t:9590,ch_rt:9600,ch_l:9604,ch_c:9590,ch_r:9600,ch_lb:9600,ch_b:9590,ch_rb:9600};
+  chuckIds.forEach(id=>$(id).value=vals[id]);
+});
+$('chuck_clear').addEventListener('click',()=>{chuckIds.forEach(id=>$(id).value='')});
+[...chuckCorners].forEach(renderChuckCorner);
 
 const shotBtn=$('shotBtn');
 async function capturePwaFullPage(){
