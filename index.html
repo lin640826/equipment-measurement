@@ -104,12 +104,12 @@
       <div class="xy-summary">固定基準：X = 348,034、Y = 340,765。只要輸入移動後位置與目前 X9210 / Y9211，App 就會列出「+ 移動量」與「− 移動量」兩個結果。</div>
       <div class="quad-wrap">
         <div class="quad-head">四象限可能結果</div>
-        <div class="quad-sub">X / Y 的「＋ / −」會自動組合成四種可能，直接對照要修改的 X9210、Y9211。</div>
+        <div class="quad-sub">以下方向以「機台移動方向」顯示，四象限已做反向直覺對應，方便直接確認要修改的 X9210、Y9211。</div>
         <div class="quad-grid">
-          <div class="quad-card q-red"><div class="qname">左上 ↖</div><div class="qsign">X9210：− ｜ Y9211：＋</div><div class="quad-values"><div class="qv"><span>X9210</span><strong id="q_lt_x">—</strong></div><div class="qv"><span>Y9211</span><strong id="q_lt_y">—</strong></div></div></div>
-          <div class="quad-card q-blue"><div class="qname">右上 ↗</div><div class="qsign">X9210：＋ ｜ Y9211：＋</div><div class="quad-values"><div class="qv"><span>X9210</span><strong id="q_rt_x">—</strong></div><div class="qv"><span>Y9211</span><strong id="q_rt_y">—</strong></div></div></div>
-          <div class="quad-card q-green"><div class="qname">左下 ↙</div><div class="qsign">X9210：− ｜ Y9211：−</div><div class="quad-values"><div class="qv"><span>X9210</span><strong id="q_lb_x">—</strong></div><div class="qv"><span>Y9211</span><strong id="q_lb_y">—</strong></div></div></div>
-          <div class="quad-card q-gold"><div class="qname">右下 ↘</div><div class="qsign">X9210：＋ ｜ Y9211：−</div><div class="quad-values"><div class="qv"><span>X9210</span><strong id="q_rb_x">—</strong></div><div class="qv"><span>Y9211</span><strong id="q_rb_y">—</strong></div></div></div>
+          <div class="quad-card q-red"><div class="qname">右下 ↘</div><div class="qsign">X9210：＋ ｜ Y9211：−</div><div class="quad-values"><div class="qv"><span>X9210</span><strong id="q_lt_x">—</strong></div><div class="qv"><span>Y9211</span><strong id="q_lt_y">—</strong></div></div></div>
+          <div class="quad-card q-blue"><div class="qname">左下 ↙</div><div class="qsign">X9210：− ｜ Y9211：−</div><div class="quad-values"><div class="qv"><span>X9210</span><strong id="q_rt_x">—</strong></div><div class="qv"><span>Y9211</span><strong id="q_rt_y">—</strong></div></div></div>
+          <div class="quad-card q-green"><div class="qname">右上 ↗</div><div class="qsign">X9210：＋ ｜ Y9211：＋</div><div class="quad-values"><div class="qv"><span>X9210</span><strong id="q_lb_x">—</strong></div><div class="qv"><span>Y9211</span><strong id="q_lb_y">—</strong></div></div></div>
+          <div class="quad-card q-gold"><div class="qname">左上 ↖</div><div class="qsign">X9210：− ｜ Y9211：＋</div><div class="quad-values"><div class="qv"><span>X9210</span><strong id="q_rb_x">—</strong></div><div class="qv"><span>Y9211</span><strong id="q_rb_y">—</strong></div></div></div>
         </div>
         <div class="q-note" id="quad_note">先完整輸入 X / Y 的移動後位置與目前 X9210 / Y9211。</div>
       </div>
@@ -170,7 +170,7 @@ function calcQuadrants(){
   const xPlus=(xd==null||xp==null||Number.isNaN(xp))?null:xp+xd, xMinus=(xd==null||xp==null||Number.isNaN(xp))?null:xp-xd;
   const yPlus=(yd==null||yp==null||Number.isNaN(yp))?null:yp+yd, yMinus=(yd==null||yp==null||Number.isNaN(yp))?null:yp-yd;
   const set=(id,v)=>$(id).textContent=fmt(v);
-  set('q_lt_x',xMinus);set('q_lt_y',yPlus);set('q_rt_x',xPlus);set('q_rt_y',yPlus);set('q_lb_x',xMinus);set('q_lb_y',yMinus);set('q_rb_x',xPlus);set('q_rb_y',yMinus);
+  set('q_lt_x',xPlus);set('q_lt_y',yMinus);set('q_rt_x',xMinus);set('q_rt_y',yMinus);set('q_lb_x',xPlus);set('q_lb_y',yPlus);set('q_rb_x',xMinus);set('q_rb_y',yPlus);
   $('quad_note').textContent=(xPlus==null||xMinus==null||yPlus==null||yMinus==null)?'先完整輸入 X / Y 的移動後位置與目前 X9210 / Y9211。':'X 移動量 '+fmt(xd)+'、Y 移動量 '+fmt(yd)+'。依實際位移方向，直接選對應象限的 X9210 / Y9211 數值。';
 }
 function calcAxis(axis){const base=num(axis+'_base'),next=num(axis+'_new'),param=num(axis+'_param');const dEl=$(axis+'_delta'),pEl=$(axis+'_plus'),mEl=$(axis+'_minus'),fEl=$(axis+'_formula');if(base==null||next==null||Number.isNaN(base)||Number.isNaN(next)){dEl.textContent='—';renderEquation(pEl,null,null,'＋',null);renderEquation(mEl,null,null,'−',null);fEl.textContent='輸入原始位置與移動後位置後，自動計算移動量。';calcQuadrants();return}const delta=Math.abs(next-base);dEl.textContent=fmt(delta);if(param==null||Number.isNaN(param)){renderEquation(pEl,null,null,'＋',null);renderEquation(mEl,null,null,'−',null);fEl.textContent='移動量 = |'+fmt(next)+' − '+fmt(base)+'| = '+fmt(delta)+'；再輸入目前參數值。';calcQuadrants();return}const plus=param+delta,minus=param-delta;renderEquation(pEl,param,delta,'＋',plus);renderEquation(mEl,param,delta,'−',minus);fEl.textContent='移動量 '+fmt(delta)+'｜+ 結果 '+fmt(plus)+'｜− 結果 '+fmt(minus);calcQuadrants()}
