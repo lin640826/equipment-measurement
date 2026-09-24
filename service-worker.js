@@ -1,4 +1,4 @@
-const CACHE='equipment-measurement-pwa-v1.0.21';
+const CACHE='equipment-measurement-pwa-v1.0.21-download1';
 const ASSETS=['./index.html','./manifest.json','./html2canvas.min.js','./chuck-grid.css','./chuck-grid.js','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
 const INDEX=new URL('./index.html',self.registration.scope).href;
 const assetURLs=new Set(ASSETS.map(p=>new URL(p,self.registration.scope).href));
@@ -11,8 +11,11 @@ self.addEventListener('activate',event=>{
 self.addEventListener('fetch',event=>{
  if(event.request.method!=='GET')return;
  const url=new URL(event.request.url);if(url.origin!==self.location.origin)return;
- if(event.request.mode==='navigate'){
-  event.respondWith((async()=>{try{const r=await fetch(event.request,{cache:'no-cache'});if(!r.ok)throw new Error('Navigation failed');const c=await caches.open(CACHE);await c.put(INDEX,r.clone());return r;}catch(e){return (await caches.match(INDEX))||Response.error();}})());return;
+ const scopePath=new URL(self.registration.scope).pathname;
+ // Download files and the standalone download page must use the browser's normal network path.
+ if(url.pathname.startsWith(scopePath+'downloads/')||url.pathname===scopePath+'download.html')return;
+ if(event.request.mode==='navigate'&&(url.pathname===scopePath||url.pathname===new URL(INDEX).pathname)){
+  event.respondWith((async()=>{try{const r=await fetch(event.request,{cache:'no-cache'});if(!r.ok)throw new Error('Navigation failed');const c=await caches.open(CACHE);await c.put(INDEX,r.clone());return r;}catch(e){return (await (await caches.open(CACHE)).match(INDEX))||Response.error();}})());return;
  }
  const key=url.origin+url.pathname;if(!assetURLs.has(key))return;
  // Revalidate on each visit; offline falls back to this version's asset cache.
