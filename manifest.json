@@ -1,7 +1,7 @@
 {
   "name": "設備量測工具",
   "short_name": "設備量測",
-  "description": "五點量測與 XY 參數修正工具",
+  "description": "五點量測、XY 參數修正與 Chuck 九宮格量測工具",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -9,7 +9,17 @@
   "theme_color": "#0f172a",
   "orientation": "portrait",
   "icons": [
-    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
-    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
