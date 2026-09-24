@@ -1,4 +1,4 @@
-const CACHE='equipment-measurement-pwa-v1.0.21-download1';
+const CACHE='equipment-measurement-pwa-v1.0.22';
 const ASSETS=['./index.html','./manifest.json','./html2canvas.min.js','./chuck-grid.css','./chuck-grid.js','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
 const INDEX=new URL('./index.html',self.registration.scope).href;
 const assetURLs=new Set(ASSETS.map(p=>new URL(p,self.registration.scope).href));
