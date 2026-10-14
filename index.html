@@ -106,12 +106,12 @@
       <div class="xy-summary">固定基準：X = 348,034、Y = 340,765。只要輸入移動後位置與目前 X9210 / Y9211，App 就會列出「+ 移動量」與「− 移動量」兩個結果。</div>
       <div class="quad-wrap">
         <div class="quad-head">四象限可能結果</div>
-        <div class="quad-sub">以下方向以「機台移動方向」顯示，四象限已做反向直覺對應，方便直接確認要修改的 X9210、Y9211。</div>
+        <div class="quad-sub">依機台指定的 X9210／Y9211 調整規則：左上 ＋−、右上 −−、左下 ＋＋、右下 −＋。</div>
         <div class="quad-grid">
-          <div class="quad-card q-red"><div class="qname">右下 ↘</div><div class="qsign">X9210：＋ ｜ Y9211：−</div><div class="quad-stack"><div class="qitem"><span class="qlabel">X9210</span><strong class="qvalue" id="q_lt_x">—</strong></div><div class="qitem"><span class="qlabel">Y9211</span><strong class="qvalue" id="q_lt_y">—</strong></div></div></div>
-          <div class="quad-card q-green"><div class="qname">右上 ↗</div><div class="qsign">X9210：＋ ｜ Y9211：＋</div><div class="quad-stack"><div class="qitem"><span class="qlabel">X9210</span><strong class="qvalue" id="q_lb_x">—</strong></div><div class="qitem"><span class="qlabel">Y9211</span><strong class="qvalue" id="q_lb_y">—</strong></div></div></div>
-          <div class="quad-card q-blue"><div class="qname">左下 ↙</div><div class="qsign">X9210：− ｜ Y9211：−</div><div class="quad-stack"><div class="qitem"><span class="qlabel">X9210</span><strong class="qvalue" id="q_rt_x">—</strong></div><div class="qitem"><span class="qlabel">Y9211</span><strong class="qvalue" id="q_rt_y">—</strong></div></div></div>
-          <div class="quad-card q-gold"><div class="qname">左上 ↖</div><div class="qsign">X9210：− ｜ Y9211：＋</div><div class="quad-stack"><div class="qitem"><span class="qlabel">X9210</span><strong class="qvalue" id="q_rb_x">—</strong></div><div class="qitem"><span class="qlabel">Y9211</span><strong class="qvalue" id="q_rb_y">—</strong></div></div></div>
+          <div class="quad-card q-red"><div class="qname">左上 ↖</div><div class="qsign">X9210：＋ ｜ Y9211：−</div><div class="quad-stack"><div class="qitem"><span class="qlabel">X9210</span><strong class="qvalue" id="q_lt_x">—</strong></div><div class="qitem"><span class="qlabel">Y9211</span><strong class="qvalue" id="q_lt_y">—</strong></div></div></div>
+          <div class="quad-card q-blue"><div class="qname">右上 ↗</div><div class="qsign">X9210：− ｜ Y9211：−</div><div class="quad-stack"><div class="qitem"><span class="qlabel">X9210</span><strong class="qvalue" id="q_rt_x">—</strong></div><div class="qitem"><span class="qlabel">Y9211</span><strong class="qvalue" id="q_rt_y">—</strong></div></div></div>
+          <div class="quad-card q-green"><div class="qname">左下 ↙</div><div class="qsign">X9210：＋ ｜ Y9211：＋</div><div class="quad-stack"><div class="qitem"><span class="qlabel">X9210</span><strong class="qvalue" id="q_lb_x">—</strong></div><div class="qitem"><span class="qlabel">Y9211</span><strong class="qvalue" id="q_lb_y">—</strong></div></div></div>
+          <div class="quad-card q-gold"><div class="qname">右下 ↘</div><div class="qsign">X9210：− ｜ Y9211：＋</div><div class="quad-stack"><div class="qitem"><span class="qlabel">X9210</span><strong class="qvalue" id="q_rb_x">—</strong></div><div class="qitem"><span class="qlabel">Y9211</span><strong class="qvalue" id="q_rb_y">—</strong></div></div></div>
         </div>
         <div class="q-note" id="quad_note">先完整輸入 X / Y 的移動後位置與目前 X9210 / Y9211。</div>
       </div>
@@ -175,7 +175,7 @@
       </div>
       <p class="chuck-help" id="chuck_help">點選格子輸入數值；四角點可一次開關。</p>
     </section>
-    <div class="app-version" data-app-version="1.0.23">設備量測工具 · v1.0.23</div>
+    <div class="app-version" data-app-version="1.0.24">設備量測工具 · v1.0.24</div>
   </main>
   <button id="shotBtn" class="shot-btn" type="button">📸 整頁截圖</button>
 <script src="./html2canvas.min.js"></script>
