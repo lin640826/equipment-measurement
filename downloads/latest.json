@@ -1,7 +1,7 @@
 {
-  "version": "1.0.27",
-  "file": "EquipmentMeasurement-v1.0.27.apk",
+  "version": "1.0.28",
+  "file": "EquipmentMeasurement-v1.0.28.apk",
   "bytes": 1309056,
-  "sha256": "c36aadc7ef56e8d64d3aec4a4fedfa50a43d477a9fb5e6afc0a8e6354f4b54e8",
-  "source_release": "https://github.com/lin640826/equipment-measurement/releases/tag/v1.0.27"
+  "sha256": "abaa1163b76fdde01f196cae9314158646e554919e6ece8e1d6b44f5051bc83d",
+  "source_release": "https://github.com/lin640826/equipment-measurement/releases/tag/v1.0.28"
 }
